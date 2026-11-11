@@ -39,9 +39,9 @@ documentsUrl: "https://drive.google.com/...",
 | Файл | Где используется |
 | --- | --- |
 | `public/images/logo.png` (прозрачный фон; можно `.svg`/`.webp`) | шапка, подвал, favicon |
-| `public/images/main-page.png` (можно `.jpg`/`.webp`) | фото на главном экране |
-| `public/images/main-page2.mp4` | видео в разделе «Біз туралы» |
-| `public/images/gallery/*.jpg/png/webp` | галерея (сортировка по имени: `01.jpg`, `02.jpg`, …) |
+| `public/images/main-page.jpeg` (можно `.png`/`.webp`, в `images/` или `images/gallery/`) | фото на главном экране |
+| `public/images/gallery/*.mp4` | вертикальные видео в разделе «Біз туралы» |
+| `public/images/gallery/*.jpg/png/webp` | галерея (сортировка по имени, `main-page` исключается) |
 
 Пока файлов нет, показываются иллюстрации-заглушки с пометкой, пустой видеоплеер не выводится.
 

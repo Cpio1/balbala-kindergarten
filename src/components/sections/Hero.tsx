@@ -9,10 +9,11 @@ import { onAnchorClick } from "@/lib/scroll";
 import { buttonClass } from "@/components/ui/Button";
 import { CloudShape, FlowerShape, SquiggleShape, StarShape, SunShape } from "@/components/ui/Decor";
 import { KindergartenScene } from "@/components/illustrations/KindergartenScene";
+import type { Photo } from "@/lib/assets";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-export function Hero({ image }: { image: string | null }) {
+export function Hero({ image }: { image: Photo | null }) {
   const { t } = useI18n();
   const h = t.hero;
 
@@ -106,13 +107,17 @@ export function Hero({ image }: { image: string | null }) {
         >
           <div aria-hidden className="blob-2 absolute inset-0 translate-x-3 translate-y-4 rotate-6 bg-sun sm:translate-x-5 sm:translate-y-5" />
           <div aria-hidden className="blob-3 absolute inset-0 -translate-x-3 -rotate-3 bg-coral/70" />
-          <div className="blob-1 relative aspect-square overflow-hidden bg-teal-soft shadow-lift ring-[6px] ring-white">
+          <div
+            className="blob-1 relative aspect-square overflow-hidden bg-teal-soft shadow-lift ring-[6px] ring-white"
+            style={image ? { aspectRatio: `${image.width} / ${image.height}` } : undefined}
+          >
             {image ? (
               <Image
-                src={image}
+                src={image.src}
                 alt={h.imageAlt}
                 fill
                 priority
+                quality={90}
                 sizes="(min-width: 1024px) 500px, (min-width: 640px) 420px, 340px"
                 className="object-cover"
               />

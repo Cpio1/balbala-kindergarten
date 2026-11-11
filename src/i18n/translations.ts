@@ -73,6 +73,7 @@ const kz = {
       },
     ],
     videoLabel: "Балабақша туралы бейне",
+    videoPlay: "Бейнені ойнату",
   },
   groups: {
     eyebrow: "Топтар",
@@ -257,6 +258,7 @@ const ru: Dictionary = {
       },
     ],
     videoLabel: "Видео о детском саде",
+    videoPlay: "Воспроизвести видео",
   },
   groups: {
     eyebrow: "Группы",

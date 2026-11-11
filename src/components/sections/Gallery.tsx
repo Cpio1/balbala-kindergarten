@@ -25,8 +25,9 @@ import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { buttonClass } from "@/components/ui/Button";
+import type { Photo } from "@/lib/assets";
 
-const INITIAL_COUNT = 6;
+const INITIAL_COUNT = 4;
 
 const shapes = [
   "rounded-[36px] rounded-tl-[90px]",
@@ -35,6 +36,16 @@ const shapes = [
   "rounded-[90px_36px_90px_36px]",
   "blob-3",
   "rounded-[36px] rounded-tr-[90px]",
+];
+
+/** Формы для фото: органичные, но без сильной обрезки кадра */
+const photoShapes = [
+  "rounded-[28px] rounded-tl-[80px]",
+  "rounded-[80px_28px_80px_28px]",
+  "rounded-[28px] rounded-br-[80px]",
+  "rounded-[46%_54%_40%_60%/24%_22%_28%_26%]",
+  "rounded-[28px] rounded-tr-[80px]",
+  "rounded-[28px_80px_28px_80px]",
 ];
 
 const placeholderStyles = [
@@ -48,7 +59,7 @@ const placeholderStyles = [
   { Icon: Castle, bg: "bg-sun-soft", fg: "text-[#a97a10]", dot: "bg-lilac" },
 ];
 
-type Item = { kind: "photo"; src: string } | { kind: "placeholder"; index: number };
+type Item = ({ kind: "photo" } & Photo) | { kind: "placeholder"; index: number };
 
 function Placeholder({ index, label, badge, large = false }: { index: number; label: string; badge: string; large?: boolean }) {
   const p = placeholderStyles[index % placeholderStyles.length];
@@ -68,13 +79,13 @@ function Placeholder({ index, label, badge, large = false }: { index: number; la
   );
 }
 
-export function Gallery({ photos }: { photos: string[] }) {
+export function Gallery({ photos }: { photos: Photo[] }) {
   const { t } = useI18n();
   const g = t.gallery;
   const hasPhotos = photos.length > 0;
 
   const items: Item[] = hasPhotos
-    ? photos.map((src) => ({ kind: "photo", src }))
+    ? photos.map((p) => ({ kind: "photo", ...p }))
     : g.placeholders.map((_, index) => ({ kind: "placeholder", index }));
 
   const [expanded, setExpanded] = useState(false);
@@ -126,7 +137,12 @@ export function Gallery({ photos }: { photos: string[] }) {
           <p className="-mt-6 mb-8 text-center text-sm font-semibold text-ink-soft md:-mt-8">{g.placeholderNote}</p>
         )}
 
-        <ul className="mx-auto grid max-w-[960px] grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3">
+        <ul
+          className={cn(
+            "mx-auto max-w-[960px]",
+            hasPhotos ? "columns-2 gap-3 sm:gap-5 md:columns-3" : "grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3",
+          )}
+        >
           <AnimatePresence initial={false}>
             {visible.map((item, i) => (
               <motion.li
@@ -137,7 +153,7 @@ export function Gallery({ photos }: { photos: string[] }) {
                 exit={{ opacity: 0, scale: 0.9 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.5, delay: (i % INITIAL_COUNT) * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className={cn(i % 3 === 1 && "md:translate-y-6")}
+                className={cn(hasPhotos ? "mb-3 break-inside-avoid sm:mb-5" : i % 3 === 1 && "md:translate-y-6")}
               >
                 <button
                   type="button"
@@ -148,16 +164,18 @@ export function Gallery({ photos }: { photos: string[] }) {
                   }}
                   aria-label={`${g.open}: ${item.kind === "photo" ? `${g.photoAlt} ${i + 1}` : g.placeholders[item.index]}`}
                   className={cn(
-                    "group relative block aspect-square w-full overflow-hidden shadow-soft transition duration-300 hover:shadow-lift",
-                    shapes[i % shapes.length],
+                    "group relative block w-full overflow-hidden bg-teal-soft shadow-soft transition duration-300 hover:shadow-lift",
+                    item.kind === "photo" ? photoShapes[i % photoShapes.length] : `aspect-square ${shapes[i % shapes.length]}`,
                   )}
+                  style={item.kind === "photo" ? { aspectRatio: `${item.width} / ${item.height}` } : undefined}
                 >
                   {item.kind === "photo" ? (
                     <Image
                       src={item.src}
                       alt={`${g.photoAlt} ${i + 1}`}
                       fill
-                      sizes="(min-width: 768px) 33vw, 50vw"
+                      sizes="(min-width: 960px) 310px, (min-width: 768px) 33vw, 50vw"
+                      quality={85}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
@@ -263,7 +281,8 @@ export function Gallery({ photos }: { photos: string[] }) {
                     src={current.src}
                     alt={`${g.photoAlt} ${openIndex + 1}`}
                     fill
-                    sizes="100vw"
+                    sizes="(min-width: 1024px) 1024px, 100vw"
+                    quality={90}
                     className="pointer-events-none rounded-3xl object-contain select-none"
                     draggable={false}
                   />

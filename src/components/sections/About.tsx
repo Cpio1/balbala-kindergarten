@@ -6,7 +6,8 @@ import { useI18n } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/cn";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { FlowerShape, StarShape } from "@/components/ui/Decor";
+import { FlowerShape, StarShape, SunShape } from "@/components/ui/Decor";
+import { VideoPlayer } from "@/components/ui/VideoPlayer";
 
 const statStyles = [
   { bg: "bg-teal", text: "text-white", shape: "blob-1", rotate: "-rotate-3" },
@@ -23,7 +24,7 @@ const featureAccents = [
   "bg-lilac-soft text-[#6b5bd0]",
 ];
 
-export function About({ video }: { video: string | null }) {
+export function About({ videos }: { videos: string[] }) {
   const { t } = useI18n();
   const a = t.about;
 
@@ -72,20 +73,35 @@ export function About({ video }: { video: string | null }) {
           </div>
         </div>
 
-        {video && (
-          <Reveal className="relative mt-14">
-            <FlowerShape aria-hidden className="absolute -top-5 -left-3 z-10 size-12 animate-wiggle text-coral" />
-            <div className="overflow-hidden rounded-[36px] bg-ink/5 shadow-lift ring-[6px] ring-cream md:rounded-[56px]">
-              <video
-                className="aspect-video w-full bg-ink/10 object-cover"
-                src={video}
-                controls
-                playsInline
-                preload="metadata"
-                aria-label={a.videoLabel}
-              />
-            </div>
-          </Reveal>
+        {videos.length > 0 && (
+          <div className="relative mx-auto mt-14 max-w-[680px]">
+            <span aria-hidden className="blob-2 pointer-events-none absolute inset-x-6 inset-y-8 -z-0 bg-teal-soft sm:inset-x-0" />
+            <FlowerShape aria-hidden className="absolute -top-5 left-0 z-10 size-12 animate-wiggle text-coral sm:-left-4" />
+            <SunShape aria-hidden className="absolute -right-1 -bottom-4 z-10 size-12 animate-spin-slow text-sun sm:-right-4 sm:size-14" />
+            <ul
+              className={cn(
+                "relative grid gap-4 px-2 py-2 sm:gap-8 sm:px-6 sm:pb-12",
+                videos.length === 1 ? "mx-auto max-w-[300px] grid-cols-1" : "grid-cols-2",
+              )}
+            >
+              {videos.map((src, i) => (
+                <Reveal as="li" key={src} delay={i * 0.08} className={cn("min-w-0", i % 2 === 1 && "sm:translate-y-10")}>
+                  <VideoPlayer
+                    src={src}
+                    label={videos.length > 1 ? `${a.videoLabel} ${i + 1}` : a.videoLabel}
+                    playLabel={a.videoPlay}
+                    className={cn(
+                      "aspect-[9/16] w-full shadow-lift ring-[5px] ring-cream sm:ring-[6px]",
+                      i % 2 === 0
+                        ? "rounded-[32px] rounded-tl-[72px] sm:rounded-[44px] sm:rounded-tl-[110px]"
+                        : "rounded-[32px] rounded-br-[72px] sm:rounded-[44px] sm:rounded-br-[110px]",
+                    )}
+                    buttonClassName={i % 2 === 1 ? "text-teal" : undefined}
+                  />
+                </Reveal>
+              ))}
+            </ul>
+          </div>
         )}
 
         {/* Преимущества */}

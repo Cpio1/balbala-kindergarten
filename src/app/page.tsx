@@ -19,7 +19,7 @@ export default function HomePage() {
       <Header logo={assets.logo} />
       <main>
         <Hero image={assets.heroImage} />
-        <About video={assets.aboutVideo} />
+        <About videos={assets.videos} />
         <Groups />
         <Nutrition />
         <Clubs />
