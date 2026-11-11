@@ -22,11 +22,11 @@ function InfoRow({
   accent: string;
 }) {
   return (
-    <li className="flex items-start gap-4 rounded-[28px] bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:shadow-lift">
-      <span className={cn("blob-1 grid size-11 shrink-0 place-items-center", accent)}>{icon}</span>
+    <li className="flex items-start gap-4 rounded-[28px] bg-white p-4 shadow-soft transition duration-300 hover:-translate-y-0.5 hover:shadow-lift max-sm:items-center max-sm:gap-3 max-sm:rounded-[22px] max-sm:p-3.5">
+      <span className={cn("blob-1 grid size-11 shrink-0 place-items-center max-sm:size-10", accent)}>{icon}</span>
       <div className="min-w-0">
-        <p className="text-xs font-extrabold tracking-wider text-ink-soft uppercase">{label}</p>
-        <div className="mt-0.5 text-[0.95rem] leading-snug font-bold break-words text-ink">{children}</div>
+        <p className="text-xs font-extrabold tracking-wider text-ink-soft uppercase max-sm:text-[0.68rem]">{label}</p>
+        <div className="mt-0.5 text-[0.95rem] leading-snug font-bold break-words text-ink max-sm:text-[0.9rem]">{children}</div>
       </div>
     </li>
   );
@@ -38,17 +38,17 @@ export function Contacts() {
   const { phone, whatsapp, instagram } = siteConfig;
 
   return (
-    <section id="contacts" aria-labelledby="contacts-title" className="relative overflow-hidden bg-teal-soft pt-4 pb-16 md:pb-24">
+    <section id="contacts" aria-labelledby="contacts-title" className="relative overflow-hidden bg-teal-soft pt-4 pb-16 max-sm:pb-12 md:pb-24">
       <Wave className="absolute inset-x-0 -top-px h-8 w-full text-cream md:h-14" flip />
       <SunShape aria-hidden className="absolute top-20 right-[5%] hidden size-16 animate-spin-slow text-sun md:block" />
       <CloudShape aria-hidden className="absolute bottom-10 left-[3%] hidden w-24 animate-float-slow text-white md:block" />
 
-      <div className="relative mx-auto max-w-[1200px] px-4 pt-14 sm:px-6 md:pt-20">
+      <div className="relative mx-auto max-w-[1200px] px-4 pt-14 max-sm:pt-10 sm:px-6 md:pt-20">
         <SectionHeading id="contacts-title" eyebrow={c.eyebrow} title={c.title} subtitle={c.subtitle} accent="coral" />
 
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
+        <div className="grid gap-8 max-sm:gap-6 lg:grid-cols-[1fr_1.15fr] lg:gap-10">
           <Reveal>
-            <ul className="grid gap-3">
+            <ul className="grid gap-3 max-sm:gap-2.5">
               <InfoRow icon={<Building2 className="size-5" aria-hidden />} label={siteConfig.shortName} accent="bg-teal text-white">
                 {siteConfig.name[locale]}
               </InfoRow>
@@ -79,7 +79,7 @@ export function Contacts() {
               </InfoRow>
             </ul>
 
-            <div className="mt-6 flex flex-wrap gap-3">
+            <div className="mt-6 flex flex-wrap gap-3 max-sm:mt-5 max-sm:grid max-sm:grid-cols-1 max-sm:gap-2.5 max-sm:[&>a]:min-h-12">
               <a href={instagram.url} target="_blank" rel="noopener noreferrer" className={buttonClass("coral")}>
                 <InstagramIcon className="size-4" />
                 {c.instagramButton}
@@ -107,7 +107,7 @@ export function Contacts() {
           </Reveal>
 
           <Reveal delay={0.1} className="flex flex-col">
-            <div className="relative min-h-[300px] flex-1 overflow-hidden rounded-[40px] rounded-tr-[100px] bg-white shadow-lift ring-[6px] ring-white sm:min-h-[380px]">
+            <div className="relative min-h-[300px] flex-1 overflow-hidden rounded-[40px] rounded-tr-[100px] bg-white shadow-lift ring-[6px] ring-white max-sm:min-h-[260px] max-sm:rounded-[28px] max-sm:rounded-tr-[64px] max-sm:ring-4 sm:min-h-[380px]">
               <iframe
                 title={c.mapTitle}
                 src={mapsLinks.embed}

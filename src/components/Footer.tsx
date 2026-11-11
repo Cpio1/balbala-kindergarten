@@ -15,7 +15,7 @@ export function Footer({ logo }: { logo: string | null }) {
   return (
     <footer className="relative bg-ink pt-6 text-white">
       <Wave className="absolute inset-x-0 -top-px h-8 w-full text-teal-soft md:h-12" flip />
-      <div className="mx-auto grid max-w-[1200px] gap-10 px-4 pt-14 pb-10 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
+      <div className="mx-auto grid max-w-[1200px] gap-10 px-4 pt-14 pb-10 max-sm:gap-8 max-sm:pt-12 max-sm:pb-8 sm:px-6 md:grid-cols-[1.2fr_1fr_1fr]">
         <div>
           <span className="inline-flex rounded-[24px] bg-white/5 p-2 pr-4">
             <Logo src={logo} alt="«Балбала»" caption={t.header.logoCaption} size="lg" tone="light" />
@@ -35,10 +35,10 @@ export function Footer({ logo }: { logo: string | null }) {
 
         <nav aria-label={t.footer.navTitle}>
           <h2 className="text-sm font-extrabold tracking-wider text-sun uppercase">{t.footer.navTitle}</h2>
-          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+          <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm max-sm:mt-3 max-sm:gap-y-0">
             {navSections.map((id) => (
               <li key={id}>
-                <a href={`#${id}`} onClick={onAnchorClick(id)} className="text-white/80 transition hover:text-white">
+                <a href={`#${id}`} onClick={onAnchorClick(id)} className="text-white/80 transition hover:text-white max-sm:inline-block max-sm:py-1.5">
                   {t.nav[id]}
                 </a>
               </li>
@@ -61,7 +61,7 @@ export function Footer({ logo }: { logo: string | null }) {
         </div>
       </div>
       <div className="border-t border-white/10">
-        <p className="mx-auto max-w-[1200px] px-4 py-5 text-xs text-white/60 sm:px-6">
+        <p className="mx-auto max-w-[1200px] px-4 py-5 text-xs text-white/60 max-sm:py-4 max-sm:text-center max-sm:leading-relaxed sm:px-6">
           © {year} {siteConfig.name[locale]}. {t.footer.rights}
         </p>
       </div>

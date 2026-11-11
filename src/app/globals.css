@@ -81,19 +81,6 @@ section[id],
   scroll-margin-top: var(--header-h);
 }
 
-/* «Топтар» и «Тамақтану» останавливаются чуть ниже — с запасом под шапкой */
-#groups,
-#nutrition {
-  scroll-margin-top: calc(var(--header-h) + 24px);
-}
-
-@media (min-width: 1024px) {
-  #groups,
-  #nutrition {
-    scroll-margin-top: calc(var(--header-h) + 32px);
-  }
-}
-
 h1,
 h2,
 h3 {
@@ -128,6 +115,40 @@ p {
 }
 .blob-4 {
   border-radius: 38% 62% 48% 52% / 62% 38% 62% 38%;
+}
+
+/* Телефоны: меньше амплитуда у декоративных фигур и аккуратная форма фото главного экрана */
+@media (max-width: 639px) {
+  .animate-float,
+  .animate-float-slow {
+    animation-name: float-sm;
+  }
+  .animate-wiggle {
+    animation-name: wiggle-sm;
+  }
+  .hero-photo {
+    border-radius: 40px 72px 44px 64px;
+  }
+}
+
+@keyframes float-sm {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) rotate(2deg);
+  }
+}
+
+@keyframes wiggle-sm {
+  0%,
+  100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
 }
 
 .dot-grid {

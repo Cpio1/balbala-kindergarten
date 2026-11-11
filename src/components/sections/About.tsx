@@ -29,20 +29,20 @@ export function About({ videos }: { videos: string[] }) {
   const a = t.about;
 
   return (
-    <section id="about" aria-labelledby="about-title" className="relative bg-white py-16 md:py-24">
+    <section id="about" aria-labelledby="about-title" className="relative bg-white py-16 max-sm:py-12 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="grid items-center gap-10 max-sm:gap-8 lg:grid-cols-2 lg:gap-14">
           <div>
             <SectionHeading id="about-title" eyebrow={a.eyebrow} title={a.title} align="left" />
             <Reveal delay={0.05}>
-              <p className="-mt-4 text-base leading-relaxed text-ink-soft md:text-lg">{a.text}</p>
+              <p className="-mt-4 text-base leading-relaxed text-ink-soft max-sm:-mt-2 max-sm:text-[0.95rem] md:text-lg">{a.text}</p>
             </Reveal>
           </div>
 
           {/* Показатели */}
           <div className="relative">
           <StarShape aria-hidden className="absolute -top-7 right-6 z-10 size-8 animate-float text-sun" />
-          <ul className="grid grid-cols-2 gap-4 sm:gap-5">
+          <ul className="grid grid-cols-2 gap-4 max-sm:gap-3 sm:gap-5">
             {a.stats.map((s, i) => {
               const st = statStyles[i];
               return (
@@ -54,7 +54,7 @@ export function About({ videos }: { videos: string[] }) {
                   transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
                   whileHover={{ scale: 1.04, rotate: 0 }}
                   className={cn(
-                    "flex aspect-[5/4] flex-col items-center justify-center p-4 text-center shadow-soft",
+                    "flex aspect-[5/4] flex-col items-center justify-center p-4 text-center shadow-soft max-sm:aspect-auto max-sm:min-h-[112px] max-sm:px-3 max-sm:py-5",
                     st.bg,
                     st.text,
                     st.shape,
@@ -62,10 +62,10 @@ export function About({ videos }: { videos: string[] }) {
                     i === 3 && "ring-2 ring-teal/30",
                   )}
                 >
-                  <span className={cn("leading-none font-black", s.value.length > 4 ? "text-2xl sm:text-3xl" : "text-4xl sm:text-5xl")}>
+                  <span className={cn("leading-none font-black", s.value.length > 4 ? "text-2xl max-sm:text-[1.4rem] sm:text-3xl" : "text-4xl max-sm:text-[2.1rem] sm:text-5xl")}>
                     {s.value}
                   </span>
-                  <span className="mt-2 text-sm font-bold opacity-90 sm:text-base">{s.label}</span>
+                  <span className="mt-2 text-sm font-bold opacity-90 max-sm:mt-1.5 max-sm:text-[0.8rem] max-sm:leading-tight sm:text-base">{s.label}</span>
                 </motion.li>
               );
             })}
@@ -74,7 +74,7 @@ export function About({ videos }: { videos: string[] }) {
         </div>
 
         {videos.length > 0 && (
-          <div className="relative mx-auto mt-14 max-w-[680px]">
+          <div className="relative mx-auto mt-14 max-w-[680px] max-sm:mt-10">
             <span aria-hidden className="blob-2 pointer-events-none absolute inset-x-6 inset-y-8 -z-0 bg-teal-soft sm:inset-x-0" />
             <FlowerShape aria-hidden className="absolute -top-5 left-0 z-10 size-12 animate-wiggle text-coral sm:-left-4" />
             <SunShape aria-hidden className="absolute -right-1 -bottom-4 z-10 size-12 animate-spin-slow text-sun sm:-right-4 sm:size-14" />
@@ -105,7 +105,7 @@ export function About({ videos }: { videos: string[] }) {
         )}
 
         {/* Преимущества */}
-        <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+        <ul className="mt-14 grid gap-4 max-sm:mt-10 max-sm:gap-3 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
           {a.features.map((f, i) => {
             const Icon = featureIcons[i];
             return (
@@ -113,19 +113,19 @@ export function About({ videos }: { videos: string[] }) {
                 as="li"
                 key={i}
                 delay={i * 0.06}
-                className="group h-full rounded-[28px] rounded-tr-[64px] bg-cream p-5 transition-shadow duration-300 hover:shadow-lift"
+                className="group h-full rounded-[28px] rounded-tr-[64px] bg-cream p-5 transition-shadow duration-300 hover:shadow-lift max-sm:grid max-sm:grid-cols-[auto_1fr] max-sm:gap-x-4 max-sm:rounded-[24px] max-sm:rounded-tr-[48px] max-sm:p-4"
                 whileHover={{ y: -4 }}
               >
                   <span
                     className={cn(
-                      "blob-2 grid size-12 place-items-center transition-transform duration-300 group-hover:rotate-12",
+                      "blob-2 grid size-12 place-items-center transition-transform duration-300 group-hover:rotate-12 max-sm:row-span-2 max-sm:size-11",
                       featureAccents[i],
                     )}
                   >
                     <Icon className="size-6" aria-hidden />
                   </span>
-                  <h3 className="mt-4 text-lg leading-snug font-extrabold text-ink">{f.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{f.text}</p>
+                  <h3 className="mt-4 text-lg leading-snug font-extrabold text-ink max-sm:mt-0 max-sm:self-center max-sm:text-base">{f.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-ink-soft max-sm:col-start-2 max-sm:mt-1 max-sm:text-[0.85rem]">{f.text}</p>
               </Reveal>
             );
           })}

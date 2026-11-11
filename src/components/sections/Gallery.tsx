@@ -40,12 +40,12 @@ const shapes = [
 
 /** Формы для фото: органичные, но без сильной обрезки кадра */
 const photoShapes = [
-  "rounded-[28px] rounded-tl-[80px]",
-  "rounded-[80px_28px_80px_28px]",
-  "rounded-[28px] rounded-br-[80px]",
-  "rounded-[46%_54%_40%_60%/24%_22%_28%_26%]",
-  "rounded-[28px] rounded-tr-[80px]",
-  "rounded-[28px_80px_28px_80px]",
+  "rounded-[28px] rounded-tl-[80px] max-sm:rounded-[20px] max-sm:rounded-tl-[52px]",
+  "rounded-[80px_28px_80px_28px] max-sm:rounded-[52px_20px_52px_20px]",
+  "rounded-[28px] rounded-br-[80px] max-sm:rounded-[20px] max-sm:rounded-br-[52px]",
+  "rounded-[46%_54%_40%_60%/24%_22%_28%_26%] max-sm:rounded-[44%_56%_40%_60%/18%_16%_20%_18%]",
+  "rounded-[28px] rounded-tr-[80px] max-sm:rounded-[20px] max-sm:rounded-tr-[52px]",
+  "rounded-[28px_80px_28px_80px] max-sm:rounded-[20px_52px_20px_52px]",
 ];
 
 const placeholderStyles = [
@@ -129,7 +129,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
   const current = openIndex !== null ? items[openIndex] : null;
 
   return (
-    <section id="gallery" aria-labelledby="gallery-title" className="relative bg-cream py-16 md:py-24">
+    <section id="gallery" aria-labelledby="gallery-title" className="relative bg-cream py-16 max-sm:py-12 md:py-24">
       <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
         <SectionHeading id="gallery-title" eyebrow={g.eyebrow} title={g.title} subtitle={g.subtitle} accent="teal" />
 
@@ -140,7 +140,9 @@ export function Gallery({ photos }: { photos: Photo[] }) {
         <ul
           className={cn(
             "mx-auto max-w-[960px]",
-            hasPhotos ? "columns-2 gap-3 sm:gap-5 md:columns-3" : "grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3",
+            // на телефонах сетка ужимается по высоте экрана, чтобы фото и кнопка помещались целиком
+            hasPhotos && "max-w-[max(240px,calc((100svh_-_400px)_*_0.75_+_12px))] md:max-w-[960px]",
+            hasPhotos ? "columns-2 gap-3 sm:gap-5 md:columns-4" : "grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3",
           )}
         >
           <AnimatePresence initial={false}>
@@ -174,7 +176,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
                       src={item.src}
                       alt={`${g.photoAlt} ${i + 1}`}
                       fill
-                      sizes="(min-width: 960px) 310px, (min-width: 768px) 33vw, 50vw"
+                      sizes="(min-width: 960px) 230px, (min-width: 768px) 25vw, 50vw"
                       quality={85}
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
@@ -193,12 +195,12 @@ export function Gallery({ photos }: { photos: Photo[] }) {
         </ul>
 
         {canExpand && (
-          <Reveal className="mt-12 flex justify-center">
+          <Reveal className="mt-6 flex justify-center md:mt-10">
             <button
               type="button"
               onClick={() => setExpanded((v) => !v)}
               aria-expanded={expanded}
-              className={buttonClass("coral")}
+              className={buttonClass("coral", "max-sm:min-h-12 max-sm:px-7")}
             >
               {expanded ? g.showLess : g.showMore}
               {expanded ? <ChevronUp className="size-4" aria-hidden /> : <ChevronDown className="size-4" aria-hidden />}
@@ -240,7 +242,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
                     go(-1);
                   }}
                   aria-label={g.prev}
-                  className="absolute left-2 z-10 hidden size-11 place-items-center rounded-full bg-white/90 text-ink shadow-lift transition hover:bg-white sm:left-5 sm:grid"
+                  className="absolute left-2 z-10 hidden size-11 place-items-center rounded-full bg-white/90 text-ink shadow-lift transition hover:bg-white max-sm:bottom-3 max-sm:left-4 max-sm:grid sm:left-5 sm:grid"
                 >
                   <ChevronLeft className="size-5" />
                 </button>
@@ -251,7 +253,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
                     go(1);
                   }}
                   aria-label={g.next}
-                  className="absolute right-2 z-10 hidden size-11 place-items-center rounded-full bg-white/90 text-ink shadow-lift transition hover:bg-white sm:right-5 sm:grid"
+                  className="absolute right-2 z-10 hidden size-11 place-items-center rounded-full bg-white/90 text-ink shadow-lift transition hover:bg-white max-sm:right-4 max-sm:bottom-3 max-sm:grid sm:right-5 sm:grid"
                 >
                   <ChevronRight className="size-5" />
                 </button>
@@ -262,7 +264,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
               <motion.div
                 key={openIndex}
                 custom={direction}
-                className="relative flex h-[min(78dvh,900px)] w-full max-w-5xl touch-pan-y items-center justify-center"
+                className="relative flex h-[min(78dvh,900px)] w-full max-w-5xl touch-pan-y items-center justify-center max-sm:h-[calc(100dvh-150px)]"
                 initial={{ opacity: 0, x: direction * 60, scale: direction === 0 ? 0.94 : 1 }}
                 animate={{ opacity: 1, x: 0, scale: 1 }}
                 exit={{ opacity: 0, x: direction * -60 }}
@@ -300,7 +302,7 @@ export function Gallery({ photos }: { photos: Photo[] }) {
             </AnimatePresence>
 
             {items.length > 1 && (
-              <p className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-ink" aria-live="polite">
+              <p className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-ink max-sm:bottom-5" aria-live="polite">
                 {openIndex + 1} / {items.length}
               </p>
             )}

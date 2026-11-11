@@ -19,7 +19,7 @@ const accentMap = {
 
 export function SectionHeading({ eyebrow, title, subtitle, align = "center", accent = "teal", id }: Props) {
   return (
-    <Reveal className={cn("mb-10 md:mb-12", align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-xl")}>
+    <Reveal className={cn("mb-10 max-sm:mb-7 md:mb-12", align === "center" ? "mx-auto max-w-2xl text-center" : "max-w-xl")}>
       <span
         className={cn(
           "inline-flex items-center gap-2 rounded-full px-3.5 py-1 text-xs font-extrabold uppercase tracking-wider",
@@ -29,10 +29,10 @@ export function SectionHeading({ eyebrow, title, subtitle, align = "center", acc
         <span className="size-1.5 rounded-full bg-current" aria-hidden />
         {eyebrow}
       </span>
-      <h2 id={id} className="mt-3 text-[1.75rem] leading-tight font-black text-ink sm:text-4xl md:text-[2.6rem]">
+      <h2 id={id} className="mt-3 text-[1.75rem] leading-tight font-black text-ink max-sm:mt-2.5 max-sm:text-[1.625rem] max-[359px]:text-[1.45rem] sm:text-4xl md:text-[2.6rem]">
         {title}
       </h2>
-      {subtitle && <p className="mt-3 text-base text-ink-soft md:text-lg">{subtitle}</p>}
+      {subtitle && <p className="mt-3 text-base text-ink-soft max-sm:mt-2.5 max-sm:text-[0.95rem] max-sm:leading-relaxed md:text-lg">{subtitle}</p>}
     </Reveal>
   );
 }

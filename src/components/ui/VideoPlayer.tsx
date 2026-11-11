@@ -73,12 +73,12 @@ export function VideoPlayer({
         >
           <span
             className={cn(
-              "relative grid size-16 place-items-center rounded-full bg-white text-coral shadow-lift transition duration-300 group-hover:scale-110 sm:size-20",
+              "relative grid size-16 place-items-center rounded-full bg-white text-coral shadow-lift transition duration-300 group-hover:scale-110 max-[359px]:size-12 sm:size-20",
               buttonClassName,
             )}
           >
             <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-white/60 [animation-duration:2.2s]" />
-            <Play className="relative ml-1 size-7 fill-current sm:size-8" aria-hidden />
+            <Play className="relative ml-1 size-7 fill-current max-[359px]:size-5 sm:size-8" aria-hidden />
           </span>
         </button>
       )}

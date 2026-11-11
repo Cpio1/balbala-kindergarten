@@ -23,14 +23,14 @@ export function Hero({ image }: { image: Photo | null }) {
       <div aria-hidden className="pointer-events-none absolute -top-24 -left-24 size-72 rounded-full bg-sun/25 blur-3xl" />
       <div aria-hidden className="pointer-events-none absolute top-1/3 -right-32 size-96 rounded-full bg-teal/20 blur-3xl" />
 
-      <div className="relative mx-auto grid max-w-[1200px] items-center gap-10 px-4 pt-8 pb-16 sm:px-6 md:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-24">
+      <div className="relative mx-auto grid max-w-[1200px] items-center gap-10 px-4 pt-8 pb-16 max-sm:gap-0 max-sm:pt-5 max-sm:pb-12 sm:px-6 md:pt-12 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pb-24">
         {/* Текст */}
-        <div className="relative z-10 text-center lg:text-left">
+        <div className="relative z-10 text-center max-sm:contents lg:text-left">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
-            className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-xs font-extrabold text-coral-dark shadow-soft sm:text-sm"
+            className="inline-flex items-center gap-2 rounded-full bg-white px-3.5 py-1.5 text-xs font-extrabold text-coral-dark shadow-soft max-sm:order-1 max-sm:justify-self-center sm:text-sm"
           >
             <Heart className="size-4 fill-coral text-coral" aria-hidden />
             {h.subtitle}
@@ -41,7 +41,7 @@ export function Hero({ image }: { image: Photo | null }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.08, ease }}
-            className="mt-5 text-[2rem] leading-[1.1] font-black text-ink min-[400px]:text-[2.25rem] sm:text-5xl lg:text-[3.4rem]"
+            className="mt-5 text-[2rem] leading-[1.1] font-black text-ink max-sm:order-2 max-sm:mt-4 max-[359px]:text-[1.8rem] min-[400px]:text-[2.25rem] sm:text-5xl lg:text-[3.4rem]"
           >
             {h.titleStart}
             <span className="relative inline-block whitespace-nowrap text-teal">
@@ -55,7 +55,7 @@ export function Hero({ image }: { image: Photo | null }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.16, ease }}
-            className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-soft sm:text-lg lg:mx-0"
+            className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-ink-soft max-sm:order-4 max-sm:mt-6 max-sm:text-[0.95rem] sm:text-lg lg:mx-0"
           >
             {h.description}
           </motion.p>
@@ -64,7 +64,7 @@ export function Hero({ image }: { image: Photo | null }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.24, ease }}
-            className="mt-7 flex flex-wrap justify-center gap-3 lg:justify-start"
+            className="mt-7 flex flex-wrap justify-center gap-3 max-sm:order-5 max-sm:mt-5 max-sm:grid max-sm:grid-cols-2 max-sm:[&>a]:px-3 max-sm:[&>a]:py-3 lg:justify-start"
           >
             <a href="#about" onClick={onAnchorClick("about")} className={buttonClass("primary")}>
               {h.about}
@@ -78,7 +78,7 @@ export function Hero({ image }: { image: Photo | null }) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-8 flex flex-wrap justify-center gap-2.5 text-sm font-bold text-ink lg:justify-start"
+            className="mt-8 flex flex-wrap justify-center gap-2.5 text-sm font-bold text-ink max-sm:order-6 max-sm:mt-4 max-sm:gap-2 max-sm:text-[0.8rem] max-[359px]:gap-1.5 max-[359px]:text-[0.74rem] max-[359px]:[&>li]:gap-1.5 max-[359px]:[&>li]:px-2 lg:justify-start"
           >
             <li className="inline-flex items-center gap-2 rounded-2xl bg-white/80 px-3 py-2 ring-1 ring-ink/5">
               <span className="grid size-7 place-items-center rounded-full bg-sun-soft text-[#a97a10]">
@@ -103,12 +103,12 @@ export function Hero({ image }: { image: Photo | null }) {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9, delay: 0.1, ease }}
-          className="relative mx-auto w-full max-w-[340px] sm:max-w-[420px] lg:max-w-[500px]"
+          className="relative mx-auto w-full max-w-[340px] max-sm:order-3 max-sm:mt-7 max-sm:w-[calc(100%-12px)] max-sm:max-w-[400px] sm:max-w-[420px] lg:max-w-[500px]"
         >
           <div aria-hidden className="blob-2 absolute inset-0 translate-x-3 translate-y-4 rotate-6 bg-sun sm:translate-x-5 sm:translate-y-5" />
           <div aria-hidden className="blob-3 absolute inset-0 -translate-x-3 -rotate-3 bg-coral/70" />
           <div
-            className="blob-1 relative aspect-square overflow-hidden bg-teal-soft shadow-lift ring-[6px] ring-white"
+            className="blob-1 hero-photo relative aspect-square overflow-hidden bg-teal-soft shadow-lift ring-[6px] ring-white"
             style={image ? { aspectRatio: `${image.width} / ${image.height}` } : undefined}
           >
             {image ? (
@@ -118,7 +118,7 @@ export function Hero({ image }: { image: Photo | null }) {
                 fill
                 priority
                 quality={90}
-                sizes="(min-width: 1024px) 500px, (min-width: 640px) 420px, 340px"
+                sizes="(min-width: 1024px) 500px, (min-width: 640px) 420px, min(400px, 100vw)"
                 className="object-cover"
               />
             ) : (
@@ -127,11 +127,11 @@ export function Hero({ image }: { image: Photo | null }) {
           </div>
 
           {/* декоративные элементы */}
-          <SunShape className="absolute -top-6 -right-2 size-14 animate-spin-slow text-sun sm:-top-8 sm:size-20" />
-          <StarShape className="absolute top-8 -left-4 size-9 animate-float text-coral sm:-left-8 sm:size-11" />
+          <SunShape className="absolute -top-6 -right-2 size-14 animate-spin-slow text-sun max-sm:-top-5 max-sm:-right-1 max-sm:size-11 sm:-top-8 sm:size-20" />
+          <StarShape className="absolute top-8 -left-4 size-9 animate-float text-coral max-sm:top-4 max-sm:-left-2 max-sm:size-7 sm:-left-8 sm:size-11" />
           <FlowerShape className="absolute -bottom-4 left-6 hidden size-12 animate-wiggle text-lilac sm:block" />
           <CloudShape className="absolute -right-6 bottom-12 hidden w-24 animate-float-slow text-white drop-shadow-md sm:block" />
-          <StarShape className="absolute right-1/4 -bottom-6 size-7 animate-float-slow text-teal" />
+          <StarShape className="absolute right-1/4 -bottom-6 size-7 animate-float-slow text-teal max-sm:-bottom-4 max-sm:size-6" />
         </motion.div>
       </div>
 
