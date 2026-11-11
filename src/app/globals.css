@@ -81,6 +81,19 @@ section[id],
   scroll-margin-top: var(--header-h);
 }
 
+/* «Топтар» и «Тамақтану» останавливаются чуть ниже — с запасом под шапкой */
+#groups,
+#nutrition {
+  scroll-margin-top: calc(var(--header-h) + 24px);
+}
+
+@media (min-width: 1024px) {
+  #groups,
+  #nutrition {
+    scroll-margin-top: calc(var(--header-h) + 32px);
+  }
+}
+
 h1,
 h2,
 h3 {
