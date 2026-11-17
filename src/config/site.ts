@@ -38,8 +38,8 @@ export const siteConfig = {
   /** Номер WhatsApp только цифрами, например "77000000000". Пока не предоставлен. */
   whatsapp: null as string | null,
 
-  /** Ссылка на папку Google Drive с документами. Пока не предоставлена. */
-  documentsUrl: null as string | null,
+  /** Ссылка на папку Mail.ru Облака с документами. */
+  documentsUrl: "https://cloud.mail.ru/public/Js7N/k4Ycwi1Yo" as string | null,
 
   /** Публичный адрес сайта (для SEO). Можно задать через NEXT_PUBLIC_SITE_URL. */
   siteUrl:

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Clock, ExternalLink, FileText } from "lucide-react";
+import { Clock, ExternalLink, FileText, FolderOpen } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { useI18n } from "@/i18n/LanguageProvider";
 import { buttonClass } from "@/components/ui/Button";
@@ -42,11 +42,17 @@ export function Documents() {
                 <p className="mt-3 max-w-xl text-base leading-relaxed text-ink-soft max-sm:mt-2.5 max-sm:text-[0.95rem]">{d.text}</p>
               </div>
 
-              <div className="flex shrink-0 flex-col items-center gap-2">
+              <div className="flex shrink-0 flex-col items-center gap-2 max-sm:w-full">
                 {url ? (
-                  <a href={url} target="_blank" rel="noopener noreferrer" className={buttonClass("primary")}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={buttonClass("primary", "min-h-12 px-6 max-sm:w-full")}
+                  >
+                    <FolderOpen className="size-5 shrink-0" aria-hidden />
                     {d.button}
-                    <ExternalLink className="size-4" aria-hidden />
+                    <ExternalLink className="size-4 shrink-0 opacity-80" aria-hidden />
                     <span className="sr-only">{t.common.externalHint}</span>
                   </a>
                 ) : (
